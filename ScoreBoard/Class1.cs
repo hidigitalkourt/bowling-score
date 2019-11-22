@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BowlingScore
+namespace ScoreBoard
 {
     public class Class1
     {

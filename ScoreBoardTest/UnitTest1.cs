@@ -1,7 +1,7 @@
 using System;
 using Xunit;
 
-namespace BowlingScoreTest
+namespace ScoreBoardTest
 {
     public class UnitTest1
     {

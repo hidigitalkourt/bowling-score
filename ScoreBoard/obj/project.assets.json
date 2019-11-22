@@ -185,11 +185,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/hidigitalkourt/learning/bowling-score/BowlingScore/BowlingScore.csproj",
-      "projectName": "BowlingScore",
-      "projectPath": "/home/hidigitalkourt/learning/bowling-score/BowlingScore/BowlingScore.csproj",
+      "projectUniqueName": "/home/hidigitalkourt/learning/bowling-score/ScoreBoard/ScoreBoard.csproj",
+      "projectName": "ScoreBoard",
+      "projectPath": "/home/hidigitalkourt/learning/bowling-score/ScoreBoard/ScoreBoard.csproj",
       "packagesPath": "/home/hidigitalkourt/.nuget/packages/",
-      "outputPath": "/home/hidigitalkourt/learning/bowling-score/BowlingScore/obj/",
+      "outputPath": "/home/hidigitalkourt/learning/bowling-score/ScoreBoard/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/share/dotnet/sdk/NuGetFallbackFolder"
