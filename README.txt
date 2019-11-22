@@ -14,7 +14,8 @@ knock down all ten pins.
 If the first ball in a frame knocks down all ten pins,
 this is called a "strike". The frame is over. The score 
 for the frame is ten plus the total of the pins knocked 
-down in the next two balls. 
+down in the next two balls.
+
 If the second ball in a frame knocks down all ten pins, 
 this is called a "spare". The frame is over. The score 
 for the frame is ten plus the number of pins knocked 
@@ -69,10 +70,3 @@ X|7/|9-|X|-8|8/|-6|X|X|X||81
 Total score == 167
 
 
-var frame = frames.Split('|');
-        var sum = 0;
-        foreach( var ball in frame)
-        {
-            sum+= ball == "X" ? 10 : int.Parse(ball);
-        }
-        return sum;
