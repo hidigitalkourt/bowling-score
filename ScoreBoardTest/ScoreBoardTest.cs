@@ -16,17 +16,5 @@ namespace BowlingScoreTest
 
             actual.Should().Be(expected);
         }
-
-        [Fact]
-        public void ReturnsScoreForTwoBallsThrownInTwoFrames()
-        {
-            var frames = "54|54";
-            var expected = 18;
-            var actual = ScoreBoard.GetScore(frames);
-
-            actual.Should().Be(expected);
-        }
-
-        
     }
 }
