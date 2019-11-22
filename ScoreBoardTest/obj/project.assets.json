@@ -5996,7 +5996,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.2": [
-      "FluentAssertions",
+      "FluentAssertions >= 5.9.0",
       "Microsoft.NET.Test.Sdk >= 16.0.1",
       "Microsoft.NETCore.App >= 2.2.0",
       "ScoreBoard >= 1.0.0",
@@ -6049,7 +6049,7 @@
         "dependencies": {
           "FluentAssertions": {
             "target": "Package",
-            "version": "(, )"
+            "version": "[5.9.0, )"
           },
           "Microsoft.NET.Test.Sdk": {
             "target": "Package",
