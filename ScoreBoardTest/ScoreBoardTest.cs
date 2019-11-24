@@ -10,9 +10,9 @@ namespace BowlingScoreTest
         [Fact]
         public void ReturnZeroForNoScore()
         {
-            var frames = "";
+            var game = "";
             var expected = 0;
-            var actual = ScoreBoard.GetScore(frames);
+            var actual = ScoreBoard.GetScore(game);
 
             actual.Should().Be(expected);
         }
@@ -20,9 +20,9 @@ namespace BowlingScoreTest
         [Fact]
         public void ReturnZeroForTwoGutterBalls()
         {
-            var frames = "--";
+            var game = "--";
             var expected = 0;
-            var actual = ScoreBoard.GetScore(frames);
+            var actual = ScoreBoard.GetScore(game);
 
             actual.Should().Be(expected);
         }
@@ -30,9 +30,9 @@ namespace BowlingScoreTest
         [Fact]
         public void ReturnOneForOneGutterBallOnePin()
         {
-            var frames = "-1";
+            var game = "-1";
             var expected = 1;
-            var actual = ScoreBoard.GetScore(frames);
+            var actual = ScoreBoard.GetScore(game);
 
             actual.Should().Be(expected);
         }
