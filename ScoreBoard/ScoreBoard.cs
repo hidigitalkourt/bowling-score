@@ -11,15 +11,7 @@ namespace BowlingScore
             var sum = 0;
             foreach (char turn in frame)
             {
-                if( turn == '-')
-                {
-                    sum+=0;
-                }
-                else
-                {
-                    sum+= int.Parse(turn.ToString());
-                }
-              
+             sum+= turn == '-' ? 0: int.Parse(turn.ToString());
             }
             return sum;
 

@@ -18,7 +18,7 @@ namespace BowlingScoreTest
         }
 
         [Fact]
-        public void ReturnZeroForTwoGutterBalls()
+        public void ReturnZeroForAllGutterBalls()
         {
             var game = "--";
             var expected = 0;
@@ -36,5 +36,6 @@ namespace BowlingScoreTest
 
             actual.Should().Be(expected);
         }
+
     }
 }
