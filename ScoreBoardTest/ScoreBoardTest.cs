@@ -16,5 +16,16 @@ namespace BowlingScoreTest
 
             actual.Should().Be(expected);
         }
+
+        [Fact]
+        public void ReturnZeroForAllGutterBalls()
+        {
+            var game = "--|--|--|--|--|--|--|--|--|--";
+            var expected = 0;
+            var actual = ScoreBoard.GetScore(game);
+
+            actual.Should().Be(expected);
+        }
+
     }
 }
