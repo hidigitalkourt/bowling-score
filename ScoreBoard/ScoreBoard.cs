@@ -21,6 +21,10 @@ namespace BowlingScore
             return sum;
         }
 
+        public static int GetSumOnSpareFrame(string frame)
+        {
+            return 0;
+        }
 
     }
 }

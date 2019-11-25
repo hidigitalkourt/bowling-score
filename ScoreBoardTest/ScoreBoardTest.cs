@@ -27,6 +27,15 @@ namespace BowlingScoreTest
             actual.Should().Be(expected);
         }
 
+        [Fact]
+        public void ReturnTwentyEightForOneSpare()
+        {
+            var game = "--|--|--|--|--|--|--|--|-/|9-||";
+            var expected = 28;
+            var actual = ScoreBoard.GetSumOnSpareFrame(game);
+
+            actual.Should().Be(expected);
+        }
 
 
     }
