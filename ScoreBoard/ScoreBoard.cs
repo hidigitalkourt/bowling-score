@@ -7,14 +7,20 @@ namespace BowlingScore
     {
         public static int GetScore(string game)
         {
-            char[] frame = game.ToCharArray();
+            var frames = game.Split('|');
+            return frames.Select( x => GetFrameSum(x)).Sum();
+  
+
+        }
+
+        public static int GetFrameSum(string frame)
+        {
             var sum = 0;
             foreach (char turn in frame)
             {
                 sum += turn == '-' ? 0 : int.Parse(turn.ToString());
             }
             return sum;
-
         }
 
 
