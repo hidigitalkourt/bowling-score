@@ -9,8 +9,6 @@ namespace BowlingScore
         {
             var frames = game.Split('|');
             return frames.Select( x => GetFrameSum(x)).Sum();
-  
-
         }
 
         public static int GetFrameSum(string frame)
