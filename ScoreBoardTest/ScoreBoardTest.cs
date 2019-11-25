@@ -18,14 +18,16 @@ namespace BowlingScoreTest
         }
 
         [Fact]
-        public void ReturnZeroForAllGutterBalls()
+        public void ReturnNineForAllGutterBallsExceptOneTurn()
         {
-            var game = "--|--|--|--|--|--|--|--|--|--";
-            var expected = 0;
+            var game = "--|--|--|--|--|--|--|--|--|-9||";
+            var expected = 9;
             var actual = ScoreBoard.GetScore(game);
 
             actual.Should().Be(expected);
         }
+
+
 
     }
 }
