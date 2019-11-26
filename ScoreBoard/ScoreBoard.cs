@@ -5,9 +5,9 @@ namespace BowlingScore
 {
     public static class ScoreBoard
     {
-        public static int GetScore(string scoreCard)
+        public static int GetScore(string game)
         {
-            var frames = scoreCard.Split('|');
+            var frames = game.Split('|');
             return frames.Select(x => GetFrameScore(x)).Sum();
         }
 
@@ -21,25 +21,29 @@ namespace BowlingScore
             return score;
         }
 
-        public static int GetScoreOnSpareFrame(string scoreCard)
+        public static int GetScoreOnSpareFrame(string game)
         {
             var score = 0;
-            var game = scoreCard.Split('|');
-            for (var frame = 0; frame < game.Length; frame++)
-            {
-                for (var ball = 0; ball < game[frame].Length; ball++)
-                {
-                    if (game[frame][ball] == '/')
-                    {
-                        score += 10 + int.Parse(game[frame + 1][0].ToString());
-                    }
-                    else
-                    {
-                        score += game[frame][ball] == '-' ? 0 : int.Parse(game[frame][ball].ToString());   
-                    }
-                }
-
-            }
+            // var frames = game.Split('|');
+            game.Split('|')
+                .Select((frames, frame) => 
+                    frames.Select((ball, index) => ball == '/'
+                    ? 10 + int.Parse(frames[0])
+                    :(ball == '-') ? 0 : int.Parse(ball.ToString()));
+            // for (var frame = 0; frame < frames.Length; frame++)
+            // {
+            //     for (var ball = 0; ball < frames[frame].Length; ball++)
+            //     {
+            //         if (frames[frame][ball] == '/')
+            //         {
+            //             score += 10 + int.Parse(frames[frame + 1][0].ToString());
+            //         }
+            //         else
+            //         {
+            //             score += frames[frame][ball] == '-' ? 0 : int.Parse(frames[frame][ball].ToString());   
+            //         }
+            //     }
+            // }
             return score;
         }
 
