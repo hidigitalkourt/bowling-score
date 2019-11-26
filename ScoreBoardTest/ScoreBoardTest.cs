@@ -32,7 +32,7 @@ namespace BowlingScoreTest
         {
             var game = "--|--|--|--|--|--|--|--|-/|9-||";
             var expected = 28;
-            var actual = ScoreBoard.GetSumOnSpareFrame(game);
+            var actual = ScoreBoard.GetScoreOnSpareFrame(game);
 
             actual.Should().Be(expected);
         }
