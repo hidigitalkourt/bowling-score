@@ -36,17 +36,5 @@ namespace BowlingScoreTest
 
             actual.Should().Be(expected);
         }
-        
-        [Fact]
-        public void ReturnFourtyEightForOneStrikeOneSpareNinePins()
-        {
-            var game = "--|--|--|--|--|--|--|X|1/|9-||";
-            var expected = 48;
-            var actual = ScoreBoard.GetScoreOnStrikeFrame(game);
-
-            actual.Should().Be(expected);
-        }
-
-
     }
 }
