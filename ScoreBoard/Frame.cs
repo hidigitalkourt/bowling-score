@@ -8,12 +8,14 @@ namespace BowlingScore
         public bool isSpareFrame {get;}
         public bool isStrikeFrame {get;}
         public int ballOne {get; set;}
+        public int ballTwo {get; set;}
 
         public Frame( string turns)
         {
             this.isSpareFrame = IsSpareFrame(turns);
             this.isStrikeFrame = IsStrikeFrame(turns);
-            this.ballOne = GetPinsHit(turns);
+            this.ballOne = GetFirstPinsHit(turns[0]);
+            this.ballTwo = turns.Length == 2 ? GetSecondPinsHit(turns[1]) : 0;
         }
 
         public bool IsSpareFrame( string turns)
@@ -25,19 +27,35 @@ namespace BowlingScore
             return turns == "X";
         }
 
-        public int GetPinsHit( string turns)
+        public int GetFirstPinsHit(char turn)
         {
             var pinsHit = 0;
-            if( !IsStrikeFrame(turns))
+            if (!this.isStrikeFrame)
             {
-                pinsHit =  turns[0] == '-' ? 0 : int.Parse(turns[0].ToString());
+                pinsHit = turn == '-' ? 0 : int.Parse(turn.ToString());
             }
             else
             {
                 pinsHit = 10;
             }
-            return this.ballOne = pinsHit;
+            return pinsHit;
         }
+
+        public int GetSecondPinsHit(char turn)
+        {
+            var pinsHit = 0;
+            if (!this.isSpareFrame)
+            {
+                pinsHit = turn == '-' ? 0 : int.Parse(turn.ToString());
+            }
+            else
+            {
+                pinsHit = 10 - this.ballOne;
+            }
+            return pinsHit;
+        }
+
+        
 
     }
 }
