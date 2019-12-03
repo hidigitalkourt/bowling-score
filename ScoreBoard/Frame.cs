@@ -7,7 +7,7 @@ namespace BowlingScore
     {
         public bool isSpareFrame {get;}
         public bool isStrikeFrame {get;}
-         public int ballOne {get; set;}
+        public int ballOne {get; set;}
 
         public Frame( string turns)
         {
@@ -28,9 +28,9 @@ namespace BowlingScore
         public int GetPinsHit( string turns)
         {
             var pinsHit = 0;
-            if( !IsStrikeFrame(turns) && turns[0] != '-')
+            if( !IsStrikeFrame(turns))
             {
-                pinsHit = int.Parse(turns[0].ToString());
+                pinsHit =  turns[0] == '-' ? 0 : int.Parse(turns[0].ToString());
             }
             return this.ballOne = pinsHit;
         }
