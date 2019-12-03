@@ -28,20 +28,20 @@ namespace BowlingScoreTest
         }
 
         [Fact]
-        public void ReturnsFiveForBallOne()
+        public void ReturnsZeroForBallOne()
         {
-            var frame = "5/";
-            var expected = 5;
+            var frame = "-/";
+            var expected = 0;
             var actual = new Frame(frame).ballOne;
 
             actual.Should().Be(expected);
         }
 
         [Fact]
-        public void ReturnsZeroForBallOne()
+        public void ReturnsFiveForBallOne()
         {
-            var frame = "-/";
-            var expected = 0;
+            var frame = "5/";
+            var expected = 5;
             var actual = new Frame(frame).ballOne;
 
             actual.Should().Be(expected);
@@ -53,6 +53,26 @@ namespace BowlingScoreTest
             var frame = "X";
             var expected = 10;
             var actual = new Frame(frame).ballOne;
+
+            actual.Should().Be(expected);
+        }
+
+        [Fact]
+        public void ReturnsZeroForBallTwo()
+        {
+            var frame = "--";
+            var expected = 0;
+            var actual = new Frame(frame).ballTwo;
+
+            actual.Should().Be(expected);
+        }
+
+        [Fact]
+        public void ReturnsZeroForBallTwoStrikeFrame()
+        {
+            var frame = "X";
+            var expected = 0;
+            var actual = new Frame(frame).ballTwo;
 
             actual.Should().Be(expected);
         }
