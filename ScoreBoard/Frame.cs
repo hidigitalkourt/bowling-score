@@ -32,7 +32,7 @@ namespace BowlingScore
             var pinsHit = 0;
             if (!this.isStrikeFrame)
             {
-                pinsHit = turn == '-' ? 0 : int.Parse(turn.ToString());
+                pinsHit = CountForGutterOrPins(turn);
             }
             else
             {
@@ -46,7 +46,7 @@ namespace BowlingScore
             var pinsHit = 0;
             if (!this.isSpareFrame)
             {
-                pinsHit = turn == '-' ? 0 : int.Parse(turn.ToString());
+                pinsHit = CountForGutterOrPins(turn);
             }
             else
             {
@@ -55,7 +55,10 @@ namespace BowlingScore
             return pinsHit;
         }
 
-        
+        private static int CountForGutterOrPins( char turn)
+        {
+            return turn == '-' ? 0 : int.Parse(turn.ToString());;
+        }
 
     }
 }
