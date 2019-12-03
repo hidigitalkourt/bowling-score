@@ -46,5 +46,15 @@ namespace BowlingScoreTest
 
             actual.Should().Be(expected);
         }
+
+        [Fact]
+        public void ReturnsTenForBallOne()
+        {
+            var frame = "X";
+            var expected = 10;
+            var actual = new Frame(frame).ballOne;
+
+            actual.Should().Be(expected);
+        }
     }
 }

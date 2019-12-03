@@ -32,6 +32,10 @@ namespace BowlingScore
             {
                 pinsHit =  turns[0] == '-' ? 0 : int.Parse(turns[0].ToString());
             }
+            else
+            {
+                pinsHit = 10;
+            }
             return this.ballOne = pinsHit;
         }
 
