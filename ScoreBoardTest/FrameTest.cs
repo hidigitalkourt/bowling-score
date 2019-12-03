@@ -5,7 +5,7 @@ using Xunit;
 
 namespace BowlingScoreTest
 {
-      public class FrameTest
+    public class FrameTest
     {
         [Fact]
         public void ReturnsTrueForSpareFrame()
@@ -62,6 +62,16 @@ namespace BowlingScoreTest
         {
             var frame = "-5";
             var expected = 5;
+            var actual = new Frame(frame).ballTwo;
+
+            actual.Should().Be(expected);
+        }
+
+        [Fact]
+        public void ReturnsTenForBallTwo()
+        {
+            var frame = "-/";
+            var expected = 10;
             var actual = new Frame(frame).ballTwo;
 
             actual.Should().Be(expected);

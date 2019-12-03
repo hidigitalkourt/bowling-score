@@ -5,12 +5,12 @@ namespace BowlingScore
 {
     public class Frame
     {
-        public bool isSpareFrame {get;}
-        public bool isStrikeFrame {get;}
-        public int ballOne {get; set;}
-        public int ballTwo {get; set;}
+        public bool isSpareFrame { get; }
+        public bool isStrikeFrame { get; }
+        public int ballOne { get; set; }
+        public int ballTwo { get; set; }
 
-        public Frame( string turns)
+        public Frame(string turns)
         {
             this.isSpareFrame = IsSpareFrame(turns);
             this.isStrikeFrame = IsStrikeFrame(turns);
@@ -18,7 +18,7 @@ namespace BowlingScore
             this.ballTwo = turns.Length == 2 ? GetSecondPinsHit(turns[1]) : 0;
         }
 
-        public bool IsSpareFrame( string turns)
+        public bool IsSpareFrame(string turns)
         {
             return turns.Contains('/');
         }
@@ -55,9 +55,9 @@ namespace BowlingScore
             return pinsHit;
         }
 
-        private static int CountForGutterOrPins( char turn)
+        private static int CountForGutterOrPins(char turn)
         {
-            return turn == '-' ? 0 : int.Parse(turn.ToString());;
+            return turn == '-' ? 0 : int.Parse(turn.ToString()); ;
         }
 
     }
