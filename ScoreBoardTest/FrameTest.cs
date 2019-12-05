@@ -32,7 +32,7 @@ namespace BowlingScoreTest
         {
             var frame = "-/";
             var expected = 0;
-            var actual = new Frame(frame).ballOne;
+            var actual = new Frame(frame).ballOnePinsHit;
 
             actual.Should().Be(expected);
         }
@@ -42,7 +42,7 @@ namespace BowlingScoreTest
         {
             var frame = "5/";
             var expected = 5;
-            var actual = new Frame(frame).ballOne;
+            var actual = new Frame(frame).ballOnePinsHit;
 
             actual.Should().Be(expected);
         }
@@ -52,7 +52,7 @@ namespace BowlingScoreTest
         {
             var frame = "X";
             var expected = 10;
-            var actual = new Frame(frame).ballOne;
+            var actual = new Frame(frame).ballOnePinsHit;
 
             actual.Should().Be(expected);
         }
@@ -62,7 +62,7 @@ namespace BowlingScoreTest
         {
             var frame = "--";
             var expected = 0;
-            var actual = new Frame(frame).ballTwo;
+            var actual = new Frame(frame).ballTwoPinsHit;
 
             actual.Should().Be(expected);
         }
@@ -72,7 +72,7 @@ namespace BowlingScoreTest
         {
             var frame = "X";
             var expected = 0;
-            var actual = new Frame(frame).ballTwo;
+            var actual = new Frame(frame).ballTwoPinsHit;
 
             actual.Should().Be(expected);
         }
@@ -82,7 +82,7 @@ namespace BowlingScoreTest
         {
             var frame = "-5";
             var expected = 5;
-            var actual = new Frame(frame).ballTwo;
+            var actual = new Frame(frame).ballTwoPinsHit;
 
             actual.Should().Be(expected);
         }
@@ -92,7 +92,7 @@ namespace BowlingScoreTest
         {
             var frame = "-/";
             var expected = 10;
-            var actual = new Frame(frame).ballTwo;
+            var actual = new Frame(frame).ballTwoPinsHit;
 
             actual.Should().Be(expected);
         }
