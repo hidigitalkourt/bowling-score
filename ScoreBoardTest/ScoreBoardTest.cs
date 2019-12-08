@@ -50,6 +50,7 @@ namespace BowlingScoreTest
         [Fact]
         public void ReturnsOneHundredFiftyForAllSpareFrames()
         {
+
             var game = "5/|5/|5/|5/|5/|5/|5/|5/|5/|5/||5";
             var expected = 150;
             var actual = ScoreBoard.GetTotalScore(game);

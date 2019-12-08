@@ -9,10 +9,7 @@ namespace BowlingScore
     {
         [System.Flags]
         [System.Runtime.InteropServices.ComVisible(false)]
-        public enum StringSplitOptions
-        {
-            RemoveEmptyEntries = 1
-        }
+        public enum StringSplitOptions{}
         public static int GetTotalScore(string scoreCard)
         {
             if( scoreCard.Length == 0) return 0;
@@ -22,7 +19,7 @@ namespace BowlingScore
                 .Select(frame => new Frame(frame))
                 .ToList();
 
-            for (var frame = 0; frame < game.Count; frame++)
+            for (var frame = 0; frame < 10; frame++)
             {
 
                 if (game[frame].isStrikeFrame)
@@ -33,7 +30,7 @@ namespace BowlingScore
                 {
                     score += GetScoreOnSpareFrame(game.GetRange(frame, 2));
                 }
-                else
+                else 
                 {
                     score += GetScoreOnGutterOrPinsFrame(game[frame]);
                 }
