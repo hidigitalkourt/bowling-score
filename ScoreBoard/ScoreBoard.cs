@@ -7,15 +7,12 @@ namespace BowlingScore
 {
     public static class ScoreBoard
     {
-        [System.Flags]
-        [System.Runtime.InteropServices.ComVisible(false)]
-        public enum StringSplitOptions{}
         public static int GetTotalScore(string scoreCard)
         {
             if( scoreCard.Length == 0) return 0;
             char[] charSeparators = new char[] {'|'};
             var score = 0;
-            var game = scoreCard.Split(charSeparators, System.StringSplitOptions.RemoveEmptyEntries)
+            var game = scoreCard.Split(charSeparators, StringSplitOptions.RemoveEmptyEntries)
                 .Select(frame => new Frame(frame))
                 .ToList();
 
