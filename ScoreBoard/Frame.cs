@@ -7,15 +7,15 @@ namespace BowlingScore
     {
         public bool isSpareFrame { get; }
         public bool isStrikeFrame { get; }
-        public int ballOne { get; set; }
-        public int ballTwo { get; set; }
+        public int ballOnePinsHit { get; set; }
+        public int ballTwoPinsHit { get; set; }
 
         public Frame(string turns)
         {
             this.isSpareFrame = IsSpareFrame(turns);
             this.isStrikeFrame = IsStrikeFrame(turns);
-            this.ballOne = GetFirstPinsHit(turns[0]);
-            this.ballTwo = turns.Length == 2 ? GetSecondPinsHit(turns[1]) : 0;
+            this.ballOnePinsHit = GetFirstPinsHit(turns[0]);
+            this.ballTwoPinsHit = turns.Length == 2 ? GetSecondPinsHit(turns[1]) : 0;
         }
 
         public bool IsSpareFrame(string turns)
@@ -50,7 +50,7 @@ namespace BowlingScore
             }
             else
             {
-                pinsHit = 10 - this.ballOne;
+                pinsHit = 10 - this.ballOnePinsHit;
             }
             return pinsHit;
         }
