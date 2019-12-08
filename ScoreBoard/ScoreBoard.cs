@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace BowlingScore
@@ -7,55 +8,62 @@ namespace BowlingScore
     {
         public static int GetTotalScore(string scoreCard)
         {
-            var frames = scoreCard.Split('|');
-            return frames.Select(x => GetScoreIncludesSpareFrame(x)).Sum();
-        }
-
-        public static int GetScoreIncludesSpareFrame(string scoreCard)
-        {
+            if( scoreCard.Length == 0) return 0;
+            
             var score = 0;
-            var game = scoreCard.Split('|');
+            var game = scoreCard.Split('|')
+                .Select(frame => new Frame(frame))
+                .ToList();
 
-            for (var frame = 0; frame < game.Length; frame++)
+            for (var frame = 0; frame < game.Count; frame++)
             {
-                for (var ball = 0; ball < game[frame].Length; ball++)
+
+                if (game[frame].isStrikeFrame)
                 {
-                    if (game[frame][ball] == '/')
-                    {
-                        score += 10 + int.Parse(game[frame + 1][0].ToString());
-                    }
-                    else if(game[frame][ball] == 'X')
-                    {
-                        score += GetScoreOnStrikeFrame(game[frame]);
-                    } 
-                    else
-                    {
-                        score += GetScoreOnGutterOrPinsFrame(game[frame][ball]);   
-                    }
+                    score += GetScoreOnStrikeFrame(game.GetRange(frame, 3));
                 }
+                else if (game[frame].isSpareFrame)
+                {
+                    score += GetScoreOnSpareFrame(game.GetRange(frame, 2));
+                }
+                else
+                {
+                    score += GetScoreOnGutterOrPinsFrame(game[frame]);
+                }
+
             }
             return score;
         }
 
-        public static int GetScoreOnGutterOrPinsFrame( char turn)
+        public static int GetScoreOnGutterOrPinsFrame(Frame frame)
         {
-            return turn == '-' ? 0 : int.Parse(turn.ToString());;
+            return frame.ballOnePinsHit + frame.ballTwoPinsHit;
         }
 
-        public static int GetScoreOnSpareFrame( string frame)
+        public static int GetScoreOnSpareFrame(List<Frame> frames)
         {
-            return 10 + (frame + 1)[0] == '-' ? 0 : int.Parse((frame + 1)[0].ToString());
+            var currentFramePinsHit = frames[0].ballOnePinsHit + frames[0].ballTwoPinsHit;
+            return currentFramePinsHit + frames[1].ballOnePinsHit;
         }
 
-        public static int GetScoreOnStrikeFrame(string frame)
+        public static int GetScoreOnStrikeFrame(List<Frame> frames)
         {
-            var nextFrameTurn1 = (frame + 1)[0] == '-' ? 0 : (frame + 1)[0] == 'X' ? 10 : int.Parse((frame + 1)[0].ToString());
-            var nextFrameTurn2 = (frame + 1)[1] == '-' ? 0 : (frame + 1)[1] == '/' ? 10 - (frame + 1)[0] == '-' ? 0 : int.Parse((frame + 1)[0].ToString()) : int.Parse((frame + 1)[0].ToString());
-            return 10 + nextFrameTurn2 + nextFrameTurn2;
+            var bonusPinsList = new List<int>();
+            var currentFramePinsHit = frames[0].ballOnePinsHit;
+
+            foreach (var frame in frames.GetRange(1, 2))
+            {
+                if (!frame.isStrikeFrame || frame.isSpareFrame)
+                {
+                    bonusPinsList.Add(frame.ballOnePinsHit);
+                    bonusPinsList.Add(frame.ballTwoPinsHit);
+                }
+                if (frame.isStrikeFrame)
+                {
+                    bonusPinsList.Add(frame.ballOnePinsHit);
+                }
+            }
+            return currentFramePinsHit + bonusPinsList.GetRange(0, 2).Sum();
         }
-
-        
-        
-
     }
 }
