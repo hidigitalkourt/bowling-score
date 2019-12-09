@@ -5,9 +5,14 @@ using System.Linq;
 
 namespace BowlingScore
 {
-    public static class ScoreBoard
+    public class ScoreBoard
     {
-        public static int GetTotalScore(string scoreCard)
+        private int gameScore;
+        public ScoreBoard( string game)
+        {
+            this.gameScore = GetTotalScore(game);
+        }
+        private int GetTotalScore(string scoreCard)
         {
             if (scoreCard.Length == 0) return 0;
             char[] charSeparators = new char[] { '|' };
@@ -39,18 +44,18 @@ namespace BowlingScore
             return score;
         }
 
-        private static int GetScoreOnGutterOrPinsFrame(Frame frame)
+        private int GetScoreOnGutterOrPinsFrame(Frame frame)
         {
             return frame.ballOnePinsHit + frame.ballTwoPinsHit;
         }
 
-        private static int GetScoreOnSpareFrame(List<Frame> frames)
+        private int GetScoreOnSpareFrame(List<Frame> frames)
         {
             var currentFramePinsHit = frames[0].ballOnePinsHit + frames[0].ballTwoPinsHit;
             return currentFramePinsHit + frames[1].ballOnePinsHit;
         }
 
-        private static int GetScoreOnStrikeFrame(List<Frame> frames)
+        private int GetScoreOnStrikeFrame(List<Frame> frames)
         {
             var bonusPinsList = new List<int>();
             var currentFramePinsHit = frames[0].ballOnePinsHit;
