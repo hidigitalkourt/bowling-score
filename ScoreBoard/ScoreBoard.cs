@@ -18,21 +18,17 @@ namespace BowlingScore
 
             for (var frame = 0; frame < 10; frame++)
             {
-
+                int  framesToAddForBonusBalls;
                 if (game[frame].isStrikeFrame)
                 {
-                    if( frame < 9) 
-                    {
-                        score += GetScoreOnStrikeFrame(game.GetRange(frame, 3));
-                    }
-                    else
-                    {
-                        score += GetScoreOnStrikeFrame(game.GetRange(frame,2));
-                    }
+                    framesToAddForBonusBalls = frame < 9 ? 3 : 2;
+                    score += GetScoreOnStrikeFrame(game.GetRange(frame, framesToAddForBonusBalls));
+                    
                 }
                 else if (game[frame].isSpareFrame)
-                {
-                    score += GetScoreOnSpareFrame(game.GetRange(frame, 2));
+                {   
+                    framesToAddForBonusBalls = 2;
+                    score += GetScoreOnSpareFrame(game.GetRange(frame, framesToAddForBonusBalls));
                 }
                 else 
                 {
