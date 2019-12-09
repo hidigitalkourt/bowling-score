@@ -57,7 +57,7 @@ namespace BowlingScore
 
         private static int CountForGutterOrPins(char turn)
         {
-            return turn == '-' ? 0 : int.Parse(turn.ToString()); ;
+            return turn == '-' ? 0 : turn == 'X' ? 10 : int.Parse(turn.ToString()); ;
         }
 
     }

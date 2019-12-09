@@ -21,7 +21,14 @@ namespace BowlingScore
 
                 if (game[frame].isStrikeFrame)
                 {
-                    score += GetScoreOnStrikeFrame(game.GetRange(frame, 3));
+                    if( frame < 9) 
+                    {
+                        score += GetScoreOnStrikeFrame(game.GetRange(frame, 3));
+                    }
+                    else
+                    {
+                        score += GetScoreOnStrikeFrame(game.GetRange(frame,2));
+                    }
                 }
                 else if (game[frame].isSpareFrame)
                 {
@@ -52,7 +59,7 @@ namespace BowlingScore
             var bonusPinsList = new List<int>();
             var currentFramePinsHit = frames[0].ballOnePinsHit;
 
-            foreach (var frame in frames.GetRange(1, 2))
+            foreach (var frame in frames)
             {
                 if (!frame.isStrikeFrame || frame.isSpareFrame)
                 {

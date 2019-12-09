@@ -67,5 +67,15 @@ namespace BowlingScoreTest
 
             actual.Should().Be(expected);
         }
+
+        [Fact]
+        public void ReturnsThreeHunddredForAllStrikeFrames()
+        {
+            var game = "X|X|X|X|X|X|X|X|X|X||XX";
+            var expected = 300;
+            var actual = ScoreBoard.GetTotalScore(game);
+
+            actual.Should().Be(expected);
+        }
     }
 }
