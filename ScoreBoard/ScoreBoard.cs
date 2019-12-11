@@ -7,16 +7,14 @@ namespace BowlingScore
 {
     public class ScoreBoard
     {
-        private List<Frame> frames;
-        public int totalScore {get;}
+        public int totalScore { get; }
 
         public ScoreBoard(string scoreCard)
         {
-            this.frames = GetFrames(scoreCard);
-            this.totalScore = GetTotalScore(this.frames);
+            this.totalScore = GetTotalScore(GetFrames(scoreCard));
         }
 
-        private List<Frame> GetFrames( string scoreCard)
+        private List<Frame> GetFrames(string scoreCard)
         {
             var charSeparators = new char[] { '|' };
             return scoreCard.Split(charSeparators, StringSplitOptions.RemoveEmptyEntries)
@@ -31,18 +29,13 @@ namespace BowlingScore
 
             for (var frameIndex = 0; frameIndex < 10; frameIndex++)
             {
-                score+= frames[frameIndex].isOpenFrame ? GetScoreOnOpenFrame(frames[frameIndex]) : 
-                        frames[frameIndex].isSpareFrame ? GetScoreOnSpareFrame(frames[frameIndex + 1]) : 0;
-
-                if (frames[frameIndex].isStrikeFrame)
-                {
-                    int framesToAddForBonusBalls = frameIndex < 9 ? 3 : 2;
-                    score += GetScoreOnStrikeFrame(frames.GetRange(frameIndex, framesToAddForBonusBalls));
-                }
+                score += frames[frameIndex].isOpenFrame ? GetScoreOnOpenFrame(frames[frameIndex]) :
+                        frames[frameIndex].isSpareFrame ? GetScoreOnSpareFrame(frames[frameIndex + 1]) :
+                        frames[frameIndex].isStrikeFrame ? GetScoreOnStrikeFrame(frames.GetRange(frameIndex, frameIndex < 9 ? 3 : 2)) : 0;
             }
             return score;
         }
-        
+
         private int GetScoreOnOpenFrame(Frame frame)
         {
             return frame.ballOnePinsHit + frame.ballTwoPinsHit;
@@ -57,21 +50,21 @@ namespace BowlingScore
         {
             var bonusPinsList = new List<int>();
 
-            foreach (var frame in frames)
+            for (var frameIndex = 0; frameIndex < 2; frameIndex++)
             {
-                if (frame.isOpenFrame || frame.isSpareFrame)
+                if (frames[frameIndex].isOpenFrame || frames[frameIndex].isSpareFrame)
                 {
-                    bonusPinsList.Add(frame.ballOnePinsHit);
-                    bonusPinsList.Add(frame.ballTwoPinsHit);
+                    bonusPinsList.Add(frames[frameIndex].ballOnePinsHit);
+                    bonusPinsList.Add(frames[frameIndex].ballTwoPinsHit);
                 }
-                if (frame.isStrikeFrame)
+                if (frames[frameIndex].isStrikeFrame)
                 {
-                    bonusPinsList.Add(frame.ballOnePinsHit);
+                    bonusPinsList.Add(frames[frameIndex].ballOnePinsHit);
                 }
             }
             return 10 + bonusPinsList.GetRange(0, 2).Sum();
         }
 
-        
+
     }
 }
