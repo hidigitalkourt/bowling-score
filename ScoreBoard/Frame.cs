@@ -10,8 +10,6 @@ namespace BowlingScore
         public bool isStrikeFrame { get; }
         public int ballOnePinsHit { get; set; }
         public int ballTwoPinsHit { get; set; }
-        public int bonusOneHitCount { get; set; }
-        public int score { get; set; }
 
         public Frame(string turns)
         {
@@ -19,8 +17,6 @@ namespace BowlingScore
             this.isStrikeFrame = IsStrikeFrame(turns);
             this.ballOnePinsHit = GetFirstPinsHit(turns[0]);
             this.ballTwoPinsHit = turns.Length == 2 ? GetSecondPinsHit(turns[1]) : 0;
-            this.bonusOneHitCount = 10;
-            this.score = GetsFrameScore();
         }
 
         public bool IsSpareFrame(string turns)
@@ -63,11 +59,6 @@ namespace BowlingScore
         private static int CountForGutterOrPins(char turn)
         {
             return turn == '-' ? 0 : turn == 'X' ? 10 : int.Parse(turn.ToString()); ;
-        }
-
-        private static int GetsFrameScore()
-        {
-            return new List<int>{0}.Sum();
         }
 
     }

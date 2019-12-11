@@ -97,14 +97,5 @@ namespace BowlingScoreTest
             actual.Should().Be(expected);
         }
 
-        [Fact]
-        public void ReturnsTwentyForFrameScore()
-        {
-            var frame = "-/";
-            var expected = 20;
-            var actual = new Frame(frame).score;
-
-            actual.Should().Be(expected);
-        }
     }
 }
