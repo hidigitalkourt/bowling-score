@@ -12,9 +12,9 @@ namespace BowlingScoreTest
         {
             var game = "";
             var expected = 0;
-            var actual = new ScoreBoard(game);
+            var actual = ScoreBoard.GetTotalScore(game);
 
-            actual.Equals(expected);
+            actual.Should().Be(expected);
         }
 
         [Fact]
@@ -22,9 +22,9 @@ namespace BowlingScoreTest
         {
             var game = "--|--|--|--|--|--|--|--|--|--";
             var expected = 0;
-            var actual = new ScoreBoard(game);
+            var actual = ScoreBoard.GetTotalScore(game);
 
-            actual.Equals(expected);
+            actual.Should().Be(expected);
         }
 
         [Fact]
@@ -32,9 +32,9 @@ namespace BowlingScoreTest
         {
             var game = "--|--|--|--|--|--|--|--|--|-9";
             var expected = 9;
-            var actual = new ScoreBoard(game);
+            var actual = ScoreBoard.GetTotalScore(game);
 
-            actual.Equals(expected);
+            actual.Should().Be(expected);
         }
 
         [Fact]
@@ -42,9 +42,9 @@ namespace BowlingScoreTest
         {
             var game = "9-|9-|9-|9-|9-|9-|9-|9-|9-|9-";
             var expected = 90;
-            var actual = new ScoreBoard(game);
+            var actual = ScoreBoard.GetTotalScore(game);
 
-            actual.Equals(expected);
+            actual.Should().Be(expected);
         }
 
         [Fact]
@@ -53,9 +53,9 @@ namespace BowlingScoreTest
 
             var game = "5/|5/|5/|5/|5/|5/|5/|5/|5/|5/||5";
             var expected = 150;
-            var actual = new ScoreBoard(game);
+            var actual = ScoreBoard.GetTotalScore(game);
 
-            actual.Equals(expected);
+            actual.Should().Be(expected);
         }
 
         [Fact]
@@ -63,9 +63,9 @@ namespace BowlingScoreTest
         {
             var game = "--|--|--|--|--|--|--|--|-/|9-";
             var expected = 28;
-            var actual = new ScoreBoard(game);
+            var actual = ScoreBoard.GetTotalScore(game);
 
-            actual.Equals(expected);
+            actual.Should().Be(expected);
         }
 
         [Fact]
@@ -73,9 +73,9 @@ namespace BowlingScoreTest
         {
             var game = "X|X|X|X|X|X|X|X|X|X||XX";
             var expected = 300;
-            var actual = new ScoreBoard(game);
+            var actual = ScoreBoard.GetTotalScore(game);
 
-            actual.Equals(expected);
+            actual.Should().Be(expected);
         }
     }
 }
