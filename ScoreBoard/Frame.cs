@@ -6,6 +6,7 @@ namespace BowlingScore
 {
     public class Frame
     {
+        public bool isOpenFrame { get; }
         public bool isSpareFrame { get; }
         public bool isStrikeFrame { get; }
         public int ballOnePinsHit { get; set; }
@@ -13,12 +14,17 @@ namespace BowlingScore
 
         public Frame(string turns)
         {
+            this.isOpenFrame = IsOpenFrame(turns);
             this.isSpareFrame = IsSpareFrame(turns);
             this.isStrikeFrame = IsStrikeFrame(turns);
             this.ballOnePinsHit = GetFirstPinsHit(turns[0]);
             this.ballTwoPinsHit = turns.Length == 2 ? GetSecondPinsHit(turns[1]) : 0;
         }
 
+        public bool IsOpenFrame(string turns)
+        {
+            return !IsSpareFrame(turns) && !IsStrikeFrame(turns);
+        }
         public bool IsSpareFrame(string turns)
         {
             return turns.Contains('/');

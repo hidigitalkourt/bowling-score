@@ -28,6 +28,16 @@ namespace BowlingScoreTest
         }
 
         [Fact]
+        public void ReturnsTrueForOpenFrame()
+        {
+            var frame = "18";
+            var expected = true;
+            var actual = new Frame(frame).isOpenFrame;
+
+            actual.Should().Be(expected);
+        }
+
+        [Fact]
         public void ReturnsZeroForBallOne()
         {
             var frame = "-/";
