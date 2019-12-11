@@ -21,23 +21,22 @@ namespace BowlingScore
                 .Select(frame => new Frame(frame))
                 .ToList();
 
-            for (var frame = 0; frame < 10; frame++)
+            for (var frameIndex = 0; frameIndex < 10; frameIndex++)
             {
                 int framesToAddForBonusBalls;
-                if (game[frame].isStrikeFrame)
+                if (game[frameIndex].isStrikeFrame)
                 {
-                    framesToAddForBonusBalls = frame < 9 ? 3 : 2;
-                    score += GetScoreOnStrikeFrame(game.GetRange(frame, framesToAddForBonusBalls));
+                    framesToAddForBonusBalls = frameIndex < 9 ? 3 : 2;
+                    score += GetScoreOnStrikeFrame(game.GetRange(frameIndex, framesToAddForBonusBalls));
 
                 }
-                else if (game[frame].isSpareFrame)
+                else if (game[frameIndex].isSpareFrame)
                 {
-                    framesToAddForBonusBalls = 2;
-                    score += GetScoreOnSpareFrame(game.GetRange(frame, framesToAddForBonusBalls));
+                    score += GetScoreOnSpareFrame(game[frameIndex + 1]);
                 }
                 else
                 {
-                    score += GetScoreOnGutterOrPinsFrame(game[frame]);
+                    score += GetScoreOnGutterOrPinsFrame(game[frameIndex]);
                 }
 
             }
@@ -49,16 +48,14 @@ namespace BowlingScore
             return frame.ballOnePinsHit + frame.ballTwoPinsHit;
         }
 
-        private int GetScoreOnSpareFrame(List<Frame> frames)
+        private int GetScoreOnSpareFrame(Frame frame)
         {
-            var currentFramePinsHit = frames[0].ballOnePinsHit + frames[0].ballTwoPinsHit;
-            return currentFramePinsHit + frames[1].ballOnePinsHit;
+            return 10 + frame.ballOnePinsHit;
         }
 
         private int GetScoreOnStrikeFrame(List<Frame> frames)
         {
             var bonusPinsList = new List<int>();
-            var currentFramePinsHit = frames[0].ballOnePinsHit;
 
             foreach (var frame in frames)
             {
@@ -72,7 +69,7 @@ namespace BowlingScore
                     bonusPinsList.Add(frame.ballOnePinsHit);
                 }
             }
-            return currentFramePinsHit + bonusPinsList.GetRange(0, 2).Sum();
+            return 10 + bonusPinsList.GetRange(0, 2).Sum();
         }
     }
 }
