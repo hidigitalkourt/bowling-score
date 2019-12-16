@@ -7,6 +7,9 @@ namespace BowlingScore
 {
     public class ScoreBoard
     {
+        private int[] turns = new int[21];
+        private int currentTurn = 0;
+
         public int GetTotalScore(string scoreCard)
         {
             var frames = GetFrames(scoreCard);
@@ -61,11 +64,6 @@ namespace BowlingScore
                 }
             }
             return 10 + bonusPinsList.GetRange(0, 2).Sum();
-        }
-
-        public void Dispose()
-        {
-            ~ScoreBoard.GetTotalScore()
         }
     }
 }
