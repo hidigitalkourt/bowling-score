@@ -10,7 +10,11 @@ namespace BowlingScore
         public int GetTotalScore(string scoreCard)
         {
             var frames = GetFrames(scoreCard);
-            if (frames.Count == 0) return 0;
+            if (frames.Count == 0)
+            {
+                return 0;
+            }
+
             var score = 0;
 
             for (var frameIndex = 0; frameIndex < 10; frameIndex++)
@@ -57,6 +61,11 @@ namespace BowlingScore
                 }
             }
             return 10 + bonusPinsList.GetRange(0, 2).Sum();
+        }
+
+        public void Dispose()
+        {
+            ~ScoreBoard.GetTotalScore()
         }
     }
 }
