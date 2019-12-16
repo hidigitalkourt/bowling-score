@@ -7,23 +7,9 @@ namespace BowlingScore
 {
     public class ScoreBoard
     {
-        public int totalScore { get; }
-
-        public ScoreBoard(string scoreCard)
+        public int GetTotalScore(string scoreCard)
         {
-            this.totalScore = GetTotalScore(GetFrames(scoreCard));
-        }
-
-        private List<Frame> GetFrames(string scoreCard)
-        {
-            var charSeparators = new char[] { '|' };
-            return scoreCard.Split(charSeparators, StringSplitOptions.RemoveEmptyEntries)
-                .Select(frame => new Frame(frame))
-                .ToList();
-        }
-
-        private int GetTotalScore(List<Frame> frames)
-        {
+            var frames = GetFrames(scoreCard);
             if (frames.Count == 0) return 0;
             var score = 0;
 
@@ -34,6 +20,14 @@ namespace BowlingScore
                         frames[frameIndex].isStrikeFrame ? GetScoreOnStrikeFrame(frames.GetRange(frameIndex, frameIndex < 9 ? 3 : 2)) : 0;
             }
             return score;
+        }
+
+        private List<Frame> GetFrames(string scoreCard)
+        {
+            var charSeparators = new char[] { '|' };
+            return scoreCard.Split(charSeparators, StringSplitOptions.RemoveEmptyEntries)
+                .Select(frame => new Frame(frame))
+                .ToList();
         }
 
         private int GetScoreOnOpenFrame(Frame frame)
@@ -64,7 +58,5 @@ namespace BowlingScore
             }
             return 10 + bonusPinsList.GetRange(0, 2).Sum();
         }
-
-
     }
 }
