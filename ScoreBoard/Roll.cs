@@ -10,7 +10,7 @@ namespace BowlingScore
         public bool isSpare { get; }
         public bool isStrike { get; }
         public int pinsHit { get; set; }
-       
+
 
         public Roll(char roll)
         {
@@ -40,7 +40,7 @@ namespace BowlingScore
             {
                 pinsHit = 10;
             }
-            else if(this.isGutter)
+            else if (this.isGutter)
             {
                 pinsHit = 0;
             }
@@ -49,11 +49,6 @@ namespace BowlingScore
                 pinsHit = int.Parse(roll.ToString());
             }
             return pinsHit;
-        }
-
-        private static int CountForGutterOrPins(char roll)
-        {
-            return roll == '-' ? 0 : roll == 'X' ? 10 : int.Parse(roll.ToString()); ;
         }
 
     }
