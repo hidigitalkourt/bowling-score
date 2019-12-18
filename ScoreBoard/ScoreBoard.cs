@@ -6,59 +6,62 @@ namespace BowlingScore
 {
     public class ScoreBoard
     {
-        private int currentTurn = 0;
-
-        private List<Roll> GetFrames(string scoreCard)
+        private List<Roll> rolls = new List<Roll>();
+        
+        private void GetRolls(string scoreCard)
         {
             var charSeparators = new char[] { '|' };
-            return scoreCard.Split(charSeparators, StringSplitOptions.RemoveEmptyEntries)
+            var generatedRolls = scoreCard.Split(charSeparators, StringSplitOptions.RemoveEmptyEntries)
                 .Select(frame => frame.Select(x => new Roll(x)))
                 .SelectMany(x => x)
                 .ToList();
+            rolls.AddRange(generatedRolls);
         }
 
         public int GetTotalScore(string scoreCard)
         {
-            var frames = GetFrames(scoreCard);
-            if (frames.Count == 0) return 0;
-            var score = 0;
+            GetRolls(scoreCard);
 
-            for (var frameIndex = 0; frameIndex < 10; frameIndex++)
+            if (rolls.Count == 0)
             {
-                score += frames[frameIndex].isOpenFrame ? GetScoreOnOpenFrame(frames[frameIndex]) :
-                        frames[frameIndex].isSpareFrame ? GetScoreOnSpareFrame(frames[frameIndex + 1]) :
-                        frames[frameIndex].isStrikeFrame ? GetScoreOnStrikeFrame(frames.GetRange(frameIndex, frameIndex < 9 ? 3 : 2)) : 0;
+                return 0;
+            }
+
+            var score = 0;
+            var frameIndex =0;
+            for (var frame = 0; frame < 10; frame++)
+            {
+                if(rolls[frameIndex].isStrike)
+                {
+                  score += GetStrikeFrameCount(frameIndex);
+                  frameIndex ++;  
+                }
+                else if(rolls[frameIndex].isSpare)
+                {
+                    score += GetSpareFrameCount(frameIndex);
+                    frameIndex += 2;
+                }
+                else
+                {
+                    score += GetScoreOnOpenFrame(frameIndex);
+                }
             }
             return score;
         }
 
-        private int GetScoreOnOpenFrame(Roll frame)
+        private int GetScoreOnOpenFrame(int frameIndex)
         {
-            return frame.ballOnePinsHit + frame.ballTwoPinsHit;
+            return rolls[frameIndex].pinsHit + rolls[frameIndex+1].pinsHit;
         }
 
-        private int GetScoreOnSpareFrame(Roll frame)
+        private int GetSpareFrameCount(int frameIndex)
         {
-            return 10 + frame.ballOnePinsHit;
+            return 10 - rolls[frameIndex - 1].pinsHit + rolls[frameIndex + 1].pinsHit;
         }
 
-        private int GetScoreOnStrikeFrame(List<Roll> frames)
+        private int GetStrikeFrameCount(int frameIndex)
         {
-            var bonusPinsList = new List<int>();
-
-            for (var frameIndex = 0; frameIndex < 2; frameIndex++)
-            {
-                if (frames[frameIndex].isOpenFrame || frames[frameIndex].isSpareFrame)
-                {
-                    bonusPinsList.Add(frames[frameIndex].ballOnePinsHit);
-                    bonusPinsList.Add(frames[frameIndex].ballTwoPinsHit);
-                }
-                if (frames[frameIndex].isStrikeFrame)
-                {
-                    bonusPinsList.Add(frames[frameIndex].ballOnePinsHit);
-                }
-            }
-            return 10 + bonusPinsList.GetRange(0, 2).Sum();
+            return 10 + rolls[frameIndex+1].pinsHit + rolls[frameIndex+2].pinsHit;
         }
 
 

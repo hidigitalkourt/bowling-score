@@ -36,13 +36,17 @@ namespace BowlingScore
         public int GetPinsHit(char roll)
         {
             var pinsHit = 0;
-            if (this.isStrike)
+            if (this.isStrike || this.isSpare)
             {
-                pinsHit = CountForGutterOrPins(roll);
+                pinsHit = 10;
+            }
+            else if(this.isGutter)
+            {
+                pinsHit = 0;
             }
             else
             {
-                pinsHit = 10;
+                pinsHit = int.Parse(roll.ToString());
             }
             return pinsHit;
         }
