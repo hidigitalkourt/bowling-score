@@ -2,22 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 
-
 namespace BowlingScore
 {
     public class ScoreBoard
     {
-        private int[] turns = new int[21];
         private int currentTurn = 0;
+
+        private List<Roll> GetFrames(string scoreCard)
+        {
+            var charSeparators = new char[] { '|' };
+            return scoreCard.Split(charSeparators, StringSplitOptions.RemoveEmptyEntries)
+                .Select(frame => frame.Select(x => new Roll(x)))
+                .SelectMany(x => x)
+                .ToList();
+        }
 
         public int GetTotalScore(string scoreCard)
         {
             var frames = GetFrames(scoreCard);
-            if (frames.Count == 0)
-            {
-                return 0;
-            }
-
+            if (frames.Count == 0) return 0;
             var score = 0;
 
             for (var frameIndex = 0; frameIndex < 10; frameIndex++)
@@ -29,25 +32,17 @@ namespace BowlingScore
             return score;
         }
 
-        private List<Frame> GetFrames(string scoreCard)
-        {
-            var charSeparators = new char[] { '|' };
-            return scoreCard.Split(charSeparators, StringSplitOptions.RemoveEmptyEntries)
-                .Select(frame => new Frame(frame))
-                .ToList();
-        }
-
-        private int GetScoreOnOpenFrame(Frame frame)
+        private int GetScoreOnOpenFrame(Roll frame)
         {
             return frame.ballOnePinsHit + frame.ballTwoPinsHit;
         }
 
-        private int GetScoreOnSpareFrame(Frame frame)
+        private int GetScoreOnSpareFrame(Roll frame)
         {
             return 10 + frame.ballOnePinsHit;
         }
 
-        private int GetScoreOnStrikeFrame(List<Frame> frames)
+        private int GetScoreOnStrikeFrame(List<Roll> frames)
         {
             var bonusPinsList = new List<int>();
 
@@ -65,5 +60,7 @@ namespace BowlingScore
             }
             return 10 + bonusPinsList.GetRange(0, 2).Sum();
         }
+
+
     }
 }
