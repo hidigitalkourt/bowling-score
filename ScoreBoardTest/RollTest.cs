@@ -58,9 +58,18 @@ namespace BowlingScoreTest
         }
 
         [Fact]
-        public void ReturnsTen()
+        public void ReturnsTenForAStrike()
         {
             var roll = 'X';
+            var expected = 10;
+            var actual = new Roll(roll).pinsHit;
+
+            actual.Should().Be(expected);
+        }
+        [Fact]
+        public void ReturnsTenForASpare()
+        {
+            var roll = '/';
             var expected = 10;
             var actual = new Roll(roll).pinsHit;
 

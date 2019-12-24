@@ -26,17 +26,16 @@ namespace BowlingScore
             {
                 return 0;
             }
-
             var score = 0;
             var frameIndex =0;
             for (var frame = 0; frame < 10; frame++)
             {
-                if(rolls[frameIndex].isStrike)
+                if (rolls[frameIndex].pinsHit == 10)
                 {
-                  score += GetStrikeFrameCount(frameIndex);
-                  frameIndex ++;  
+                    score += GetStrikeFrameCount(frameIndex);
+                    frameIndex++;
                 }
-                else if(rolls[frameIndex].isSpare)
+                else if (rolls[frameIndex].pinsHit + rolls[frameIndex+1].pinsHit == 10)
                 {
                     score += GetSpareFrameCount(frameIndex);
                     frameIndex += 2;
@@ -44,6 +43,7 @@ namespace BowlingScore
                 else
                 {
                     score += GetScoreOnOpenFrame(frameIndex);
+                    frameIndex += 2;
                 }
             }
             return score;
@@ -56,7 +56,7 @@ namespace BowlingScore
 
         private int GetSpareFrameCount(int frameIndex)
         {
-            return 10 - rolls[frameIndex - 1].pinsHit + rolls[frameIndex + 1].pinsHit;
+            return 10 + rolls[frameIndex+2].pinsHit;
         }
 
         private int GetStrikeFrameCount(int frameIndex)
