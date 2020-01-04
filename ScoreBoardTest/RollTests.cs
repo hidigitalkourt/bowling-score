@@ -5,7 +5,7 @@ using Xunit;
 
 namespace BowlingScoreTest
 {
-    public class RollNewTestNew
+    public class RollTest
     {
         [Fact]
         public void ReturnsNinePinsHitForSpare()
@@ -13,7 +13,7 @@ namespace BowlingScoreTest
             var roll = '/';
             var prevRoll = '1';
             var expected = 9;
-            var actual = new RollNew(prevRoll,roll);
+            var actual = new Roll(prevRoll,roll);
 
             actual.PinsHit.Should().Be(expected);
         }
@@ -25,7 +25,7 @@ namespace BowlingScoreTest
             var expected = 10;
             var prevRoll = '1';
 
-            var actual = new RollNew(prevRoll,roll);
+            var actual = new Roll(prevRoll,roll);
 
             actual.PinsHit.Should().Be(expected);
         }
@@ -36,7 +36,7 @@ namespace BowlingScoreTest
             var roll = '-';
             var expected = 0;
             var prevRoll = '1';
-            var actual = new RollNew(prevRoll,roll);
+            var actual = new Roll(prevRoll,roll);
 
             actual.PinsHit.Should().Be(expected);
         }
@@ -47,7 +47,7 @@ namespace BowlingScoreTest
             var roll = '5';
             var expected = 5;
             var prevRoll = '1';
-            var actual = new RollNew(prevRoll,roll);
+            var actual = new Roll(prevRoll,roll);
 
             actual.PinsHit.Should().Be(expected);
         }

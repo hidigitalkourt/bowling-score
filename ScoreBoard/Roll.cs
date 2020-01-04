@@ -6,49 +6,42 @@ namespace BowlingScore
 {
     public class Roll
     {
-        public bool isGutter { get; }
-        public bool isSpare { get; }
-        public bool isStrike { get; }
-        public int pinsHit { get; set; }
+        
+        public char roll;
 
+        public char prevRoll;
 
-        public Roll(char roll)
+        public int pinsHit;
+        public int  PinsHit
         {
-            this.isGutter = IsGutter(roll);
-            this.isSpare = IsSpare(roll);
-            this.isStrike = IsStrike(roll);
-            this.pinsHit = GetPinsHit(roll);
-        }
-
-        public bool IsGutter(char rolls)
-        {
-            return rolls == '-';
-        }
-        public bool IsSpare(char rolls)
-        {
-            return rolls == '/';
-        }
-        public bool IsStrike(char rolls)
-        {
-            return rolls == 'X';
-        }
-
-        public int GetPinsHit(char roll)
-        {
-            var pinsHit = 0;
-            if (this.isStrike || this.isSpare)
+            get { 
+                if (this.roll == '-')
+                {
+                    this.pinsHit = 0;
+                }
+                else if(this.roll == 'X')
+                {
+                    this.pinsHit = 10;
+                }
+                else if(this.roll == '/')
+                {
+                    this.pinsHit = 10 - (prevRoll == '-' ? 0 : int.Parse(this.prevRoll.ToString()));
+                }
+                else 
+                {
+                    this.pinsHit = int.Parse(this.roll.ToString());
+                }
+                return this.pinsHit;
+                }
+            set
             {
-                pinsHit = 10;
+                this.pinsHit = value;
             }
-            else if (this.isGutter)
-            {
-                pinsHit = 0;
-            }
-            else
-            {
-                pinsHit = int.Parse(roll.ToString());
-            }
-            return pinsHit;
+        }
+        public Roll(char prevRoll, char roll)
+        {
+           this.roll = roll;
+           this.prevRoll = prevRoll;
         }
 
     }

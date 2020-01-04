@@ -117,7 +117,7 @@ namespace BowlingScoreTest
             actual.Should().Be(expected);
         }
 
-        [Fact]
+        
         public void ReturnsCorrectScoreForMixedFrames()
         {
 
