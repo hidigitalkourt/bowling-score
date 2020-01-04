@@ -8,43 +8,46 @@ namespace BowlingScoreTest
     public class RollNewTestNew
     {
         [Fact]
-        public void ReturnsTrueForSpare()
+        public void ReturnsNinePinsHitForSpare()
         {
             var roll = '/';
-            var expected = 5;
-            var actual = new RollNew(roll);
-            actual.PinsHit = 5;
+            var prevRoll = '1';
+            var expected = 9;
+            var actual = new RollNew(prevRoll,roll);
 
             actual.PinsHit.Should().Be(expected);
         }
 
         [Fact]
-        public void ReturnsTrueForStrike()
+        public void ReturnsTenPinsForStrike()
         {
             var roll = 'X';
             var expected = 10;
-            var actual = new RollNew(roll);
+            var prevRoll = '1';
+
+            var actual = new RollNew(prevRoll,roll);
 
             actual.PinsHit.Should().Be(expected);
         }
 
         [Fact]
-        public void ReturnsTrueForGutter()
+        public void ReturnsZeroPinsHitForGutter()
         {
             var roll = '-';
             var expected = 0;
-            var actual = new RollNew(roll);
+            var prevRoll = '1';
+            var actual = new RollNew(prevRoll,roll);
 
             actual.PinsHit.Should().Be(expected);
         }
 
         [Fact]
-        public void ReturnsFive()
+        public void ReturnsFivePins()
         {
             var roll = '5';
             var expected = 5;
-            var actual = new RollNew(roll);
-            actual.PinsHit = 5;
+            var prevRoll = '1';
+            var actual = new RollNew(prevRoll,roll);
 
             actual.PinsHit.Should().Be(expected);
         }
