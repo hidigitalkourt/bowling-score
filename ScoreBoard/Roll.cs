@@ -8,10 +8,11 @@ namespace BowlingScore
     {
         
         public char roll;
-
-        public char prevRoll;
-
+        private char prevRoll;
         public int pinsHit;
+        public bool isStrike;
+        public bool isSpare;
+
         public int  PinsHit
         {
             get { 
@@ -42,7 +43,16 @@ namespace BowlingScore
         {
            this.roll = roll;
            this.prevRoll = prevRoll;
+           this.isStrike = IsStrike(roll);
+           this.isStrike = IsSpare(roll);
         }
-
+        private bool IsStrike( char roll)
+        {
+            return roll == 'X';
+        }
+        private bool IsSpare(char roll)
+        {
+            return roll == '/';
+        }
     }
 }
